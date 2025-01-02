@@ -1,50 +1,52 @@
-import { Event } from '../../lib/modules/Event';
-import { client } from '../../index';
-import {
-  CommandError,
-  ErrorTypes,
-} from '../../lib/modules/classes/CommandError';
+import { Event } from '@/handlers/Event';
+import { client } from '@/index';
+import { CommandError, ErrorTypes } from '@/handlers/CommandError';
 
 export default new Event('messageCreate', async (message) => {
-  const prefix = '.';
+    const prefix = client.prefix;
 
-  console.log(message);
+    const Error = new CommandError(message);
 
-  const Error = new CommandError(message);
+    if (
+        message.author.bot ||
+        !message.guild ||
+        !message.content.startsWith(prefix)
+    ) {
+        return;
+    }
 
-  if (
-    message.author.bot ||
-    !message.guild ||
-    !message.content.startsWith(prefix)
-  ) {
-    return;
-  }
+    const [cmd, ...args] = message.content
+        .slice(prefix.length)
+        .trim()
+        .split(/ +/g);
 
-  const [cmd, ...args] = message.content
-    .slice(prefix.length)
-    .trim()
-    .split(/ +/g);
+    const command =
+        client.commands.get(cmd.toLowerCase()) ||
+        client.commands.find((c) => c.aliases?.includes(cmd.toLowerCase()));
 
-  const command =
-    client.commands.get(cmd.toLowerCase()) ||
-    client.commands.find((c) => c.aliases?.includes(cmd.toLowerCase()));
+    if (!command || !command.execute.message) return;
 
-  if (!command || !command.execute.message) return;
+    const member = message.guild.members.cache.get(message.author.id);
+    if (!member) return;
 
-  // Enter Admin ID(s)
-  const admins: string[] = [];
+    if (command.isOwnerCommand && !client.admins.includes(message.author.id)) {
+        return await Error.create(
+            'このコマンドはBot関係者のみ実行可能です',
+            ErrorTypes.Warn,
+        );
+    }
 
-  if (command.isOwnerCommand && !admins.includes(message.author.id))
-    return await Error.create(
-      'このコマンドはBot関係者のみ実行可能です',
-      ErrorTypes.Warn,
-    );
+    if (client.debugMode && !client.admins.includes(message.author.id)) {
+        return await Error.create(
+            '開発モードが有効です\n' +
+                '許容されたユーザーのみコマンドを実行することができます',
+            ErrorTypes.Warn,
+        );
+    }
 
-  const member = message.guild?.members.cache.get(message.author.id);
-  if (!member) return;
+    if (!member.permissions.has(command.requiredPermissions || [])) {
+        return await Error.create('このコマンドを使用する権限が不足しています');
+    }
 
-  if (!member.permissions.has(command.requiredPermissions || []))
-    return await Error.create('このコマンドを使用する権限が不足しています');
-
-  await command.execute.message({ client, message, args });
+    await command.execute.message({ client, message, args });
 });

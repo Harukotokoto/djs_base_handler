@@ -1,19 +1,19 @@
 require('dotenv').config();
-import { Client } from './lib/modules/Client';
+import { Bot } from '@/libraries/Classes/Bot';
 
-export const client = new Client({
-  intents: ['Guilds', 'GuildMessages', 'MessageContent'],
+export const client = new Bot({
+    intents: ['Guilds', 'GuildMessages', 'MessageContent'],
 });
 
 console.clear();
 client.start();
 
 process.on('uncaughtException', async (e) => {
-  client.Logger.error(e);
-  return e;
+    client.logger.error(e);
+    return e;
 });
 
 process.on('unhandledRejection', async (e) => {
-  client.Logger.error(e);
-  return e;
+    client.logger.error(e);
+    return e;
 });
