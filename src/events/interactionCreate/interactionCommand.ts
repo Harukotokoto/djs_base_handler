@@ -1,7 +1,6 @@
 import {
     ApplicationCommandType,
     ChatInputCommandInteraction,
-    InteractionContextType,
     MessageContextMenuCommandInteraction,
     UserContextMenuCommandInteraction,
 } from 'discord.js';

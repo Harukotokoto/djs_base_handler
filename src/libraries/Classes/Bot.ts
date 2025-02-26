@@ -1,13 +1,10 @@
 import {
-    APIEmbedFooter,
     ApplicationCommandType,
     Client,
     ClientEvents,
     ClientOptions,
     Collection,
     EmbedFooterData,
-    Message,
-    PartialMessage,
 } from 'discord.js';
 import { promisify } from 'util';
 import glob from 'glob';
@@ -16,11 +13,8 @@ import { CommandType } from '@/interfaces/Command';
 import { Logger } from './Utils/Logger';
 import mongoose from 'mongoose';
 import process from 'process';
-import moment from 'moment';
 import { BotOptions } from '@/interfaces/BotOptions';
 import { client } from '@/index';
-
-const globPromise = promisify(glob);
 
 export class Bot extends Client {
     public prefix;

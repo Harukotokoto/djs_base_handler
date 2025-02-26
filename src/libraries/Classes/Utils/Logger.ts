@@ -1,5 +1,3 @@
-type LogType = 'info' | 'warn' | 'error' | 'debug';
-
 import { BackgroundColor, LogColor } from '@/libraries/Enums/LogColors';
 
 export class Logger {
@@ -11,7 +9,7 @@ export class Logger {
         );
     }
 
-    public error(message: string): void {
+    public error<T>(message: T): void {
         console.log(
             `${LogColor.Green}[ ${LogColor.Red}ERROR ${LogColor.Green}] ${LogColor.Magenta}${this.getTimestamp()} ${LogColor.Yellow}| ${LogColor.Red}${message}${LogColor.Reset}`,
         );
