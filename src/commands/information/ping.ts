@@ -1,4 +1,4 @@
-import { Command } from '@/handlers/Command';
+import { Command } from '@/libraries/classes/handlers/Command';
 import { Colors } from 'discord.js';
 
 export default new Command({

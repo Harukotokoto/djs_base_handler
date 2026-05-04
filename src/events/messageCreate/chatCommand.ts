@@ -1,6 +1,9 @@
-import { Event } from '@/handlers/Event';
+import { Event } from '@/libraries/classes/handlers/Event';
 import { client } from '@/index';
-import { CommandError, ErrorTypes } from '@/handlers/CommandError';
+import {
+    CommandError,
+    ErrorTypes,
+} from '@/libraries/classes/handlers/CommandError';
 
 export default new Event('messageCreate', async (message) => {
     const prefix = client.prefix;

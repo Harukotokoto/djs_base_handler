@@ -16,10 +16,11 @@
         "importHelpers": true,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
+        "baseUrl": "./",
         "paths": {
             "@/*": ["src/*"],
             "@/libraries/*": ["src/libraries/*"],
-            "@/handlers/*": ["src/libraries/Classes/Handlers/*"],
+            "@/handlers/*": ["src/libraries/classes/handlers/*"],
         },
     },
     "include": ["src", "src/**/*.d.ts"],

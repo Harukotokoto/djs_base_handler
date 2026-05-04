@@ -8,7 +8,7 @@ import {
     PermissionResolvable,
     UserContextMenuCommandInteraction,
 } from 'discord.js';
-import { Bot } from '@/libraries/Classes/Bot';
+import { Bot } from '@/libraries/classes/Bot';
 
 type MessageExecuteType = ({
     client,

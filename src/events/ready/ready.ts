@@ -1,4 +1,4 @@
-import { Event } from '@/handlers/Event';
+import { Event } from '@/libraries/classes/handlers/Event';
 import { client } from '@/index';
 import { ActivityType } from 'discord.js';
 
