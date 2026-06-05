@@ -1,5 +1,5 @@
 require('dotenv').config();
-import { Bot } from '@/libraries/classes/Bot';
+import { Bot } from '@/mods/Bot';
 
 export const client = new Bot({
     intents: ['Guilds', 'GuildMessages', 'MessageContent'],

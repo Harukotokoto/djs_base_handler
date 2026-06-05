@@ -1,9 +1,7 @@
-import { Event } from '@/libraries/classes/handlers/Event';
+import { Event } from '@/handlers/Event';
 import { client } from '@/index';
-import {
-    CommandError,
-    ErrorTypes,
-} from '@/libraries/classes/handlers/CommandError';
+import { CommandError, ErrorTypes } from '@/handlers/CommandError';
+import { CommandType } from 'src/interfaces/Command';
 
 export default new Event('messageCreate', async (message) => {
     const prefix = client.prefix;
@@ -25,7 +23,9 @@ export default new Event('messageCreate', async (message) => {
 
     const command =
         client.commands.get(cmd.toLowerCase()) ||
-        client.commands.find((c) => c.aliases?.includes(cmd.toLowerCase()));
+        client.commands.find((c: CommandType) =>
+            c.aliases?.includes(cmd.toLowerCase()),
+        );
 
     if (!command || !command.execute.message) return;
 

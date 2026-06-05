@@ -1,4 +1,4 @@
-import { BackgroundColor, LogColor } from '@/libraries/enums/LogColors';
+import { BackgroundColor, LogColor } from '@/lib/enums/LogColors';
 
 export class Logger {
     public constructor(private readonly timeFormat = 'YYYY/MM/DD HH:mm:ss') {}

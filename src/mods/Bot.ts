@@ -8,9 +8,9 @@ import {
 } from 'discord.js';
 import { promisify } from 'util';
 import glob from 'glob';
-import { Event } from '@/libraries/classes/handlers/Event';
+import { Event } from '@/handlers/Event';
 import { CommandType } from '@/interfaces/Command';
-import { Logger } from '@/libraries/classes/utils/Logger';
+import { Logger } from '@/mods/utils/Logger';
 import mongoose from 'mongoose';
 import process from 'process';
 import { BotOptions } from '@/interfaces/BotOptions';

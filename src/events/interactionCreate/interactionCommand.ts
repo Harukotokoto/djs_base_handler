@@ -5,11 +5,8 @@ import {
     UserContextMenuCommandInteraction,
 } from 'discord.js';
 import { client } from '@/index';
-import { Event } from '@/libraries/classes/handlers/Event';
-import {
-    CommandError,
-    ErrorTypes,
-} from '@/libraries/classes/handlers/CommandError';
+import { Event } from '@/handlers/Event';
+import { CommandError, ErrorTypes } from '@/handlers/CommandError';
 
 export default new Event('interactionCreate', async (interaction) => {
     if (interaction.isCommand()) {
